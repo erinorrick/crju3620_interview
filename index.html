@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coding Activity | CRJU 3620</title>
+<style>
+  :root {
+    --cu-gold: #CFB87C;
+    --cu-black: #020000;
+    --accessible-gold: #8D7334;
+    --sandstone: #F1EAD8;
+    --gold-tint: #EBDEC2;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--sandstone);
+    color: var(--cu-black);
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--sandstone);
+    border: 2px solid var(--cu-gold);
+    border-radius: 6px;
+    padding: 24px;
+  }
+  .banner {
+    background-color: var(--accessible-gold);
+    color: var(--white);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .banner .eyebrow {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--sandstone);
+  }
+  .banner h1 {
+    margin: 6px 0 0 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px;
+    color: var(--white);
+  }
+  p.intro { font-size: 15px; line-height: 1.55; }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: var(--accessible-gold);
+    border-bottom: 2px solid var(--cu-gold);
+    padding-bottom: 6px;
+    margin-top: 32px;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: var(--accessible-gold);
+    margin-top: 18px;
+    margin-bottom: 4px;
+  }
+  p.section-lead { font-family: Georgia, 'Times New Roman', serif; font-size: 15px; line-height: 1.5; margin-top: 6px; }
+  label {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--accessible-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 14px;
+    margin-bottom: 4px;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    color: var(--cu-black);
+    background-color: var(--white);
+    border: 1px solid var(--cu-gold);
+    border-radius: 4px;
+  }
+  textarea { resize: vertical; min-height: 60px; }
+  .question-label {
+    display: block;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--accessible-gold);
+    text-transform: none;
+    letter-spacing: normal;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .block {
+    background-color: var(--white);
+    border: 2px solid var(--cu-gold);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    position: relative;
+  }
+  .block .block-number {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--accessible-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .remove-btn {
+    background-color: var(--white);
+    color: var(--accessible-gold);
+    border: 1px solid var(--accessible-gold);
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    padding: 4px 10px;
+    cursor: pointer;
+    float: right;
+  }
+  .remove-btn:hover { background-color: var(--gold-tint); }
+  button.primary {
+    background-color: var(--accessible-gold);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 18px;
+    cursor: pointer;
+    margin-top: 16px;
+    margin-right: 10px;
+  }
+  button.primary:hover { background-color: #6e5a29; }
+  button.secondary {
+    background-color: var(--white);
+    color: var(--accessible-gold);
+    border: 2px solid var(--accessible-gold);
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 9px 18px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+  button.secondary:hover { background-color: var(--gold-tint); }
+  #output-section { display: none; }
+  #output-text {
+    width: 100%;
+    min-height: 260px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    padding: 12px;
+    background-color: var(--white);
+    border: 2px solid var(--cu-gold);
+    border-radius: 4px;
+    color: var(--cu-black);
+    white-space: pre-wrap;
+  }
+  .copy-status {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: var(--accessible-gold);
+    margin-top: 8px;
+    font-weight: bold;
+    min-height: 18px;
+  }
+  .callout {
+    background-color: var(--gold-tint);
+    border-left: 5px solid var(--cu-gold);
+    padding: 12px 16px;
+    margin-top: 16px;
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .warning-box {
+    background-color: var(--white);
+    border: 3px solid var(--accessible-gold);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .warning-box .warning-title {
+    font-size: 14px; font-weight: bold; color: var(--accessible-gold);
+    text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 6px 0;
+  }
+  .warning-box p { font-size: 14px; line-height: 1.5; color: var(--cu-black); margin: 0; }
+  details.reference {
+    background-color: var(--white);
+    border: 2px solid var(--cu-gold);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin-top: 12px;
+  }
+  details.reference summary {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--accessible-gold);
+    cursor: pointer;
+    padding: 6px 0;
+  }
+  table.ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  table.ref-table th {
+    background-color: var(--accessible-gold);
+    color: var(--white);
+    padding: 8px;
+    text-align: left;
+    border: 1px solid var(--accessible-gold);
+  }
+  table.ref-table td {
+    padding: 8px;
+    border: 1px solid var(--cu-gold);
+    color: var(--cu-black);
+    background-color: var(--white);
+  }
+  table.ref-table tr:nth-child(even) td { background-color: var(--gold-tint); }
+  .notes-block p { font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.6; margin: 0 0 8px 0; }
+  .notes-block .note-label { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-style: italic; color: var(--accessible-gold); margin-bottom: 8px; }
+  .live-count {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: var(--accessible-gold);
+    font-weight: bold;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="banner">
+    <p class="eyebrow">Week 7 &mdash; Online Module &mdash; Applied Activity</p>
+    <h1>Coding Your Interview Notes</h1>
+  </div>
+
+  <p class="intro">
+    Below are field notes from three mock interviews: one structured, one semi-structured, one unstructured, using the same personas from the in-person lab. Read them, work through the steps, then click <strong>Generate Summary</strong> and paste the result into your Week 7 Canvas submission.
+  </p>
+
+  <div class="warning-box">
+    <p class="warning-title">&#9888; Before You Start</p>
+    <p>This tool does <strong>not</strong> autosave. If you close or refresh the page, everything you've entered will be lost. Plan to complete it in one sitting, or draft your answers elsewhere first and paste them in.</p>
+  </div>
+
+  <h2>1. Read the Interview Notes</h2>
+  <p class="section-lead">Read through all three sets of notes once, start to finish, before you start labeling anything in Section 2.</p>
+
+  <details class="reference" open>
+    <summary>Interview 1 &middot; Structured &middot; Darnell, 58</summary>
+    <p class="notes-block"><span class="note-label">Interviewer read six fixed questions, word for word, no probing.</span></p>
+    <table class="ref-table">
+      <tr><th>Question read</th><th>Answer given</th></tr>
+      <tr><td>How long have you lived or worked in this neighborhood?</td><td>25 years</td></tr>
+      <tr><td>Overall, how safe do you feel during the day?</td><td>Somewhat safe</td></tr>
+      <tr><td>Overall, how safe do you feel after dark?</td><td>Somewhat unsafe</td></tr>
+      <tr><td>Changed any part of your routine because of safety concerns?</td><td>Yes</td></tr>
+      <tr><td>Contacted police about something in the neighborhood?</td><td>No</td></tr>
+      <tr><td>How many of your neighbors do you know?</td><td>Most</td></tr>
+    </table>
+  </details>
+
+  <details class="reference" open>
+    <summary>Interview 2 &middot; Semi-Structured &middot; Tom, 42</summary>
+    <div class="notes-block">
+      <p class="note-label">Interviewer used core questions with probes. Raw notes below, written live during the conversation.</p>
+      <p>&bull; Chose neighborhood 9 yrs ago for schools + parks. "Good family neighborhood," would recommend it.</p>
+      <p>&bull; Asked what a typical week looks like &mdash; mentioned working from home, kids at the elementary school two blocks over.</p>
+      <p>&bull; Probe: "has anything changed in how you get around because of safety?" &mdash; YES. Changed kids' walking route to school. Reason: speeding cars at one crossing + a car theft nearby recently.</p>
+      <p>&bull; Probe: "what led to that change specifically?" &mdash; said the car theft was "the last straw," had been thinking about it since the near-miss with speeding cars.</p>
+      <p>&bull; Mentioned neighborhood social media app makes him "more worried than what I actually see day to day."</p>
+      <p>&bull; Went to one police-district community meeting. Felt the information was "too general to actually help."</p>
+      <p>&bull; Did not bring up police contact or reporting anything himself.</p>
+    </div>
+  </details>
+
+  <details class="reference" open>
+    <summary>Interview 3 &middot; Unstructured &middot; Rosa, 67</summary>
+    <div class="notes-block">
+      <p class="note-label">Interviewer opened with one prompt and followed her lead. Raw notes below.</p>
+      <p>&bull; Retired teacher, lived here 40 years. Talked a long time about how the block has changed over the decades &mdash; says she "loves living here" despite the changes.</p>
+      <p>&bull; Brought up her husband unprompted &mdash; since he passed, she feels less safe being home alone at night. Added a doorbell camera and extra porch lights afterward.</p>
+      <p>&bull; Reflected back: "so it sounds like it changed after that." She agreed, said it wasn't really about the neighborhood changing, more about being alone.</p>
+      <p>&bull; Said a lot of longtime neighbors have moved away over the years. Misses knowing everyone &mdash; called it "eyes on the street," said that used to make her feel safe automatically.</p>
+      <p>&bull; Volunteers at the community center now. Said she feels safest "around people I know," and that's part of why she keeps volunteering.</p>
+      <p>&bull; Long pause after being asked what would make her feel safer today &mdash; eventually said "just more people like the old days," not any particular security measure.</p>
+    </div>
+  </details>
+
+  <h2>2. Label</h2>
+  <p class="section-lead">Pull at least 8 specific details from the notes above, from more than one interview. A detail worth pulling is something concrete: a decision someone made, a reason they gave, a feeling they described, or an event they mentioned. Skip plain facts like an age or a date; those don't code into anything interesting on their own.</p>
+  <p class="section-lead">For each detail, write a short label: a few words naming <strong>what that detail is an example of</strong>, not a restatement of the quote itself. A label should be something you could imagine applying to a similar detail from a completely different interview.</p>
+
+  <div class="callout">
+    <strong>Weak vs. strong label:</strong> if a note says "started parking two blocks away after a car break-in," a weak label just repeats it "parking two blocks away." A stronger label names the pattern it's an example of: "changed routine after an incident." The stronger label is reusable; it would still fit if a different person changed a different routine for a similar reason.
+  </div>
+
+  <div id="labels-container"></div>
+  <button class="secondary" type="button" onclick="addLabel()">+ Add Another Label</button>
+
+  <h2>3. Group Into Themes</h2>
+  <p class="section-lead">Set the original notes aside for a moment and look only at your list of labels. Which ones are really pointing at the same underlying idea, even if the specific details are different? Group those into 2 or 3 themes. A useful test: if you described the theme to someone else, would each label in that group be a recognizable example of it?</p>
+
+  <div class="callout">
+    <strong>Minimum requirement:</strong> at least <strong>2 themes</strong>, each with a name, a definition, and supporting evidence. You may add a third.
+  </div>
+
+  <div class="callout">
+    <strong>What each field is looking for:</strong>
+    <ul style="margin:8px 0 0 0; padding-left:20px;">
+      <li><strong>Theme name</strong> &mdash; a short phrase (3&ndash;6 words), not a full sentence. "Distrust of formal reporting" rather than "People don't trust reporting to help."</li>
+      <li><strong>One-sentence definition</strong> &mdash; describe the pattern the theme captures, in your own words. This should say more than the name alone; someone who has not read your labels should understand what belongs in this theme and what does not.</li>
+      <li><strong>Supporting evidence</strong> &mdash; the single strongest quote or detail from the notes above. Specific enough that another person could look at it and see exactly why it fits this theme.</li>
+    </ul>
+  </div>
+
+  <p class="live-count" id="live-count">0 labels &middot; 0 themes</p>
+
+  <div id="themes-container"></div>
+  <button class="secondary" type="button" onclick="addTheme()">+ Add Another Theme</button>
+
+  <h2>4. Reflection</h2>
+  <p class="section-lead">Two to three sentences each.</p>
+
+  <label class="question-label" for="q1">1. Which of the three interviews (structured, semi-structured, unstructured) gave you the richest material to code? Why do you think that is?</label>
+  <textarea id="q1"></textarea>
+
+  <label class="question-label" for="q2">2. Look back at your labels. Does one connect to a probe used in the semi-structured or unstructured interview (elaboration, clarification, example, contrast, silence)? Give a specific example.</label>
+  <textarea id="q2"></textarea>
+
+  <label class="question-label" for="q3">3. Headlee's talk emphasized open-ended questions and real listening. Point to one spot in the notes where a good probe (or a missed one) shaped what you were able to code.</label>
+  <textarea id="q3"></textarea>
+
+  <label class="question-label" for="q4">4. If a researcher had only these written notes and no memory of the actual interviews, would your labels and themes still make sense to them? What would you add to notes like these to make them more useful for coding?</label>
+  <textarea id="q4"></textarea>
+
+  <div style="margin-top:10px;">
+    <button class="primary" type="button" onclick="generateSummary()">Generate Summary</button>
+    <button class="secondary" type="button" onclick="resetForm()">Reset</button>
+  </div>
+
+  <div id="output-section">
+    <h2>Your Coding Activity Summary</h2>
+    <p style="font-family:Arial, Helvetica, sans-serif; font-size:14px;">Copy this text and paste it into your Week 7 Canvas submission.</p>
+    <textarea id="output-text" readonly></textarea>
+    <div>
+      <button class="primary" type="button" onclick="copyOutput()">Copy to Clipboard</button>
+      <span class="copy-status" id="copy-status"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let labelCount = 0;
+  let themeCount = 0;
+
+  function addLabel() {
+    labelCount++;
+    const container = document.getElementById('labels-container');
+    const block = document.createElement('div');
+    block.className = 'block';
+    block.id = 'label-' + labelCount;
+    block.innerHTML = `
+      <button class="remove-btn" type="button" onclick="removeLabel(${labelCount})">Remove</button>
+      <div class="block-number">Label ${labelCount}</div>
+      <label>Note, quote, or detail from the interviews</label>
+      <textarea class="lb-note" placeholder="e.g., Changed kids' walking route to school after a car theft nearby"></textarea>
+      <label>Your label for it (a few words)</label>
+      <input type="text" class="lb-label" placeholder="e.g., changed routine">
+    `;
+    container.appendChild(block);
+    updateLiveCount();
+  }
+
+  function removeLabel(id) {
+    const block = document.getElementById('label-' + id);
+    if (block) block.remove();
+    updateLiveCount();
+  }
+
+  function addTheme() {
+    themeCount++;
+    const container = document.getElementById('themes-container');
+    const block = document.createElement('div');
+    block.className = 'block';
+    block.id = 'theme-' + themeCount;
+    block.innerHTML = `
+      <button class="remove-btn" type="button" onclick="removeTheme(${themeCount})">Remove</button>
+      <div class="block-number">Theme ${themeCount}</div>
+      <label>Theme name</label>
+      <input type="text" class="th-name" placeholder="e.g., Changed daily routines">
+      <label>One-sentence definition</label>
+      <textarea class="th-def" placeholder="What does this theme capture?"></textarea>
+      <label>Supporting evidence (quote or detail from the notes)</label>
+      <textarea class="th-evidence" placeholder="Which specific note(s) support this theme?"></textarea>
+    `;
+    container.appendChild(block);
+    updateLiveCount();
+  }
+
+  function removeTheme(id) {
+    const block = document.getElementById('theme-' + id);
+    if (block) block.remove();
+    updateLiveCount();
+  }
+
+  function updateLiveCount() {
+    const labels = document.querySelectorAll('#labels-container .block').length;
+    const themes = document.querySelectorAll('#themes-container .block').length;
+    document.getElementById('live-count').textContent =
+      labels + ' label' + (labels === 1 ? '' : 's') + ' (minimum 8) \u00B7 ' +
+      themes + ' theme' + (themes === 1 ? '' : 's') + ' (minimum 2)';
+  }
+
+  function validateWork() {
+    const labels = document.querySelectorAll('#labels-container .block');
+    if (labels.length < 8) {
+      return 'You need at least 8 labels in Section 2. You currently have ' + labels.length + '.';
+    }
+    const themes = document.querySelectorAll('#themes-container .block');
+    if (themes.length < 2) {
+      return 'You need at least 2 themes in Section 3. You currently have ' + themes.length + '.';
+    }
+    for (const t of themes) {
+      const name = t.querySelector('.th-name').value.trim();
+      const def = t.querySelector('.th-def').value.trim();
+      const ev = t.querySelector('.th-evidence').value.trim();
+      if (!name || !def || !ev) {
+        return 'Every theme in Section 3 needs a name, a definition, and supporting evidence. Check the theme(s) you left blank.';
+      }
+    }
+    return null;
+  }
+
+  function generateSummary() {
+    const error = validateWork();
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    let out = 'CODING ACTIVITY SUMMARY\n';
+    out += '========================\n\n';
+
+    out += 'Labeled Details:\n';
+    document.querySelectorAll('#labels-container .block').forEach((block, i) => {
+      const note = block.querySelector('.lb-note').value.trim();
+      const label = block.querySelector('.lb-label').value.trim();
+      out += '\n' + (i + 1) + '. ' + (note || '[no note entered]') + '\n';
+      out += '   Label: ' + (label || '[not entered]') + '\n';
+    });
+
+    out += '\nThemes:\n';
+    document.querySelectorAll('#themes-container .block').forEach((block, i) => {
+      const name = block.querySelector('.th-name').value.trim();
+      const def = block.querySelector('.th-def').value.trim();
+      const ev = block.querySelector('.th-evidence').value.trim();
+      out += '\n' + (i + 1) + '. ' + (name || '[no name entered]') + '\n';
+      out += '   Definition: ' + (def || '[not entered]') + '\n';
+      out += '   Evidence: ' + (ev || '[not entered]') + '\n';
+    });
+
+    out += '\nReflection:\n';
+    ['q1', 'q2', 'q3', 'q4'].forEach((id, i) => {
+      const val = document.getElementById(id).value.trim();
+      out += '\n' + (i + 1) + '. ' + (val || '[not entered]') + '\n';
+    });
+
+    document.getElementById('output-text').value = out;
+    document.getElementById('output-section').style.display = 'block';
+    document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function copyOutput() {
+    const outputText = document.getElementById('output-text');
+    outputText.select();
+    outputText.setSelectionRange(0, 999999);
+    const status = document.getElementById('copy-status');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(outputText.value).then(function() {
+        status.textContent = 'Copied to clipboard!';
+      }).catch(function() {
+        status.textContent = 'Text selected \u2014 press Ctrl+C (or Cmd+C) to copy.';
+      });
+    } else {
+      try {
+        document.execCommand('copy');
+        status.textContent = 'Copied to clipboard!';
+      } catch (err) {
+        status.textContent = 'Text selected \u2014 press Ctrl+C (or Cmd+C) to copy.';
+      }
+    }
+  }
+
+  function resetForm() {
+    if (!confirm('Clear everything you\'ve entered?')) return;
+    document.getElementById('labels-container').innerHTML = '';
+    document.getElementById('themes-container').innerHTML = '';
+    ['q1', 'q2', 'q3', 'q4'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('output-section').style.display = 'none';
+    labelCount = 0;
+    themeCount = 0;
+    for (let i = 0; i < 8; i++) addLabel();
+    addTheme(); addTheme();
+  }
+
+  // Initial state: 8 label blocks and 2 theme blocks
+  for (let i = 0; i < 8; i++) addLabel();
+  addTheme();
+  addTheme();
+</script>
+
+</body>
+</html>
